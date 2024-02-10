@@ -28,3 +28,10 @@
 	<li><code>1 &lt;= s.length &lt;= 1000</code></li>
 	<li><code>s</code> consists of lowercase English letters.</li>
 </ul>
+
+
+In this question we utilized the tabulation approach to use a dp matrix.
+We are basically checking for each length of palindromes if it is possible.
+one length is always possible
+two length is possible if both characters are equal
+greater than two length is possible if the first and last character are equal and the remaining word is palindrome (this is because if we take a palindrome and add same character at start and end then it will remain palindrome)
