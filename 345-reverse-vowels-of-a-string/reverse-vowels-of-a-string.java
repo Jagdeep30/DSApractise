@@ -26,8 +26,9 @@ class Solution {
             }
         }
 
-        String ans = "";
-        for(int k=0;k<n;k++)ans+=arr[k];
-        return ans;
+        // String ans = "";
+        // for(int k=0;k<n;k++)ans+=arr[k];
+        // return ans;
+        return new String(arr);
     }
 }
