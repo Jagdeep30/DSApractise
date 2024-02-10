@@ -1,17 +1,33 @@
 class Solution {
     public int countSubstrings(String s) {
-        int count  = 0;
-        for(int i=0;i<s.length();i++){
-            for(int j=i;j<s.length();j++){
-                if(j==i){
-                    count++;
-                    continue;
-                }
-                String curr = s.substring(i,j+1);
-                String rev = (new StringBuilder(curr)).reverse().toString();
-                if(curr.equals(rev))count++;
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        int ans = 0;
+
+        //length 1 palindromes
+        for(int i=0;i<n;i++){
+            dp[i][i]=true;
+            ans++;
+        }
+
+        //length 2 palindromes
+        for(int i=0;i<=n-2;i++){
+            if(s.charAt(i)==s.charAt(i+1)){
+                dp[i][i+1]=true;
+                ans++;
             }
         }
-        return count;
+
+        //length greater than 2 palindromes
+        for(int len=3;len<=n;len++){
+            for(int i=0;i<n-len+1;i++){
+                int j = i+len-1;
+                if(s.charAt(i)==s.charAt(j) && dp[i+1][j-1]==true){
+                    dp[i][j]=true;
+                    ans++;
+                }
+            }
+        }
+        return ans;
     }
 }
