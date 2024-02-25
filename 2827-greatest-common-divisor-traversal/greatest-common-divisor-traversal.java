@@ -56,7 +56,7 @@ class Solution {
                 ans.add(i);
                 while(n%i==0)n/=i;
             }
-            if(n==0)break;
+            // if(n==0)break;
         }
 
         if(n>2){
