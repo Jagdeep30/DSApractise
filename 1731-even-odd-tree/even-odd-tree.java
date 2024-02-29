@@ -22,10 +22,10 @@ class Solution {
 
     static boolean dfs(TreeNode root,Map<Integer,Integer> mp, int level){
         if(root==null)return true;
-        if(((level & 1) == 0 && (root.val & 1) == 0) || ((level & 1) == 1 && (root.val & 1) == 1))return false;
+        if(((level & 1) == 0 && (root.val & 1) == 0) || ((level & 1) == 1 && (root.val & 1) == 1) || ((level & 1) == 0 && root.val <= mp.getOrDefault(level,0)) || ((level & 1) == 1 && root.val >= mp.getOrDefault(level,1000001)))return false;
 
-        if((level & 1) == 0 && root.val <= mp.getOrDefault(level,0))return false;
-        else if((level & 1) == 1 && root.val >= mp.getOrDefault(level,1000001))return false;
+        // if((level & 1) == 0 && root.val <= mp.getOrDefault(level,0))return false;
+        // else if((level & 1) == 1 && root.val >= mp.getOrDefault(level,1000001))return false;
 
         mp.put(level,root.val);
 
