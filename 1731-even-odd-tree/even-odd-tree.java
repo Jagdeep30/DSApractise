@@ -17,7 +17,8 @@ class Solution {
     public boolean isEvenOddTree(TreeNode root) {
         Map<Integer,Integer> mp = new HashMap<>();
 
-        return dfs(root,mp,0);
+        // return dfs(root,mp,0);
+        return bfs(root);
     }
 
     static boolean dfs(TreeNode root,Map<Integer,Integer> mp, int level){
@@ -30,5 +31,45 @@ class Solution {
         mp.put(level,root.val);
 
         return dfs(root.left,mp,level+1) && dfs(root.right,mp,level+1);
+    }
+
+
+    static boolean bfs(TreeNode root){
+        Queue<TreeNode> q = new LinkedList<>();
+        int prev = 0;
+        int level = 0;
+        q.add(root);
+        q.add(null);
+        while(!q.isEmpty()){
+            TreeNode temp = q.poll();
+
+            if(temp==null){
+                level++;
+                if(level%2==0){
+                    prev = 0;
+                }
+                else{
+                    prev = 1000001;
+                }
+                if(!q.isEmpty())q.add(null);
+                continue;
+            }
+
+            if(level%2==0){
+                // System.out.println(temp.val + "level -> " + level);
+                if(temp.val%2==0 || temp.val <= prev)return false;
+                prev = temp.val;
+            }
+            else{
+                // System.out.println(temp.val + "level -> " + level);
+                if(temp.val%2==1 || temp.val >= prev)return false;
+                prev = temp.val;
+            }
+
+            if(temp.left!=null)q.add(temp.left);
+            if(temp.right!=null)q.add(temp.right);
+        }
+
+        return true;
     }
 }
