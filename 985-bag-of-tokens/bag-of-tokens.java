@@ -18,7 +18,7 @@ class Solution {
                 power-=tokens[s];
                 score++;
                 s++;
-                
+                maxScore = Math.max(maxScore,score);
             }
             else if(score==0)return maxScore;
             else{
