@@ -5,13 +5,13 @@ class Solution {
             char ch = s.charAt(i);
             mp.put(ch,mp.getOrDefault(ch,0)+1);
         }
-        String ans = "";
+        StringBuilder ans = new StringBuilder();
         for(int i=0;i<order.length();i++){
             char ch = order.charAt(i);
             int count = mp.getOrDefault(ch,0);
             if(count!=0){
                 while(count!=0){
-                    ans+=ch;
+                    ans.append(ch);
                     count--;
                 }
                 mp.put(ch,0);
@@ -23,13 +23,13 @@ class Solution {
             char ch = e.getKey();
             if(count!=0){
                 while(count!=0){
-                    ans+=ch;
+                    ans.append(ch);
                     count--;
                 }
                 // ans+=e.getKey();
             }
         }
 
-        return ans;
+        return ans.toString();
     }
 }
