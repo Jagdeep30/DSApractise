@@ -11,7 +11,7 @@ class Solution {
 
         if(ind==-1)return word;
 
-        String nw = new StringBuilder(word.substring(0,ind+1)).reverse().toString();
-        return nw + word.substring(ind+1);
+        StringBuilder nw = new StringBuilder(word.substring(0,ind+1)).reverse();
+        return nw.append(word.substring(ind+1)).toString();
     }
 }
