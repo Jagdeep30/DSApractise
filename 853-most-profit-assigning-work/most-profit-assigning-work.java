@@ -13,6 +13,13 @@ class Solution {
             return Integer.compare(a[0],b[0]);
         });
 
+        int[] maxProfit = new int[profit.length];
+        maxProfit[0] = arr[0][1];
+
+        for(int i=1;i<profit.length;i++){
+            maxProfit[i] = Math.max(arr[i][1],maxProfit[i-1]);
+        }
+
         // for(int i=0;i<arr.length;i++){
         //     System.out.println(Arrays.toString(arr[i]));
         // }
@@ -22,12 +29,13 @@ class Solution {
             int prof = binarySearch(worker[i],arr);
             
             if(prof>=0){
-                int max = Integer.MIN_VALUE;
-                for(int j=0;j<=prof;j++){
-                    max = Math.max(max,arr[j][1]);
-                }
+                // int max = Integer.MIN_VALUE;
+                // for(int j=0;j<=prof;j++){
+                //     max = Math.max(max,arr[j][1]);
+                // }
                 // System.out.println(prof+ " " +max);
-                ans+=max;
+                // ans+=max;
+                ans+=maxProfit[prof];
             }
         }
 
