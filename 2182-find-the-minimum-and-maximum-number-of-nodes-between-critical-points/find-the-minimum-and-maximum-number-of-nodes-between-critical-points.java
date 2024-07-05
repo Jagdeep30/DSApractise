@@ -31,7 +31,7 @@ class Solution {
             temp = temp.next;
         }
         if(dist.size()<=1)return ans;
-        Collections.sort(dist);
+        // Collections.sort(dist);
         ans[1] = dist.get(dist.size()-1) - dist.get(0);
 
         int min = Integer.MAX_VALUE;
