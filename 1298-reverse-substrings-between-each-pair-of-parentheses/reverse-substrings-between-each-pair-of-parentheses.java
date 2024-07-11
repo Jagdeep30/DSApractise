@@ -21,9 +21,9 @@ class Solution {
                 st.push(ch+"");
             }
         }
-        String ans = "";
+        StringBuilder ans = new StringBuilder("");
         while(!st.isEmpty()){
-            ans += new StringBuilder(st.pop()).reverse().toString();
+            ans.append(new StringBuilder(st.pop()).reverse());
         }
         return new StringBuilder(ans).reverse().toString();
     }
