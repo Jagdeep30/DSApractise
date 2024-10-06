@@ -3,7 +3,8 @@ class Solution {
         Arrays.sort(points,(a,b)->{
             return Integer.compare(a[0],b[0]);
         });
-        List<Pair<Integer,Integer>> ls = new ArrayList<>();
+        int ans = 0;
+        // List<Pair<Integer,Integer>> ls = new ArrayList<>();
         int s = points[0][0];
         int e = points[0][1];
         for(int i=1;i<points.length;i++){
@@ -12,13 +13,14 @@ class Solution {
                 e = Math.min(e,points[i][1]);
             }
             else{
-                Pair<Integer,Integer> p = new Pair<>(s,e);
-                ls.add(p);
+                // Pair<Integer,Integer> p = new Pair<>(s,e);
+                // ls.add(p);
+                ans++;
                 s = points[i][0];
                 e = points[i][1];
             }
         }
-        ls.add(new Pair<Integer,Integer>(s,e));
-        return ls.size();
+        // ls.add(new Pair<Integer,Integer>(s,e));
+        return ans+1;
     }
 }
