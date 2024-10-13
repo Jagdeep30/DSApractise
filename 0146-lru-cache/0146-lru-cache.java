@@ -37,11 +37,12 @@ class LRUCache {
         }
         else{
             n.prev.next = n.next;
+            n.next.prev = n.prev;
         }
         n.next = null;
         n.prev = tail;
         tail.next = n;
-        tail = n;
+        tail = tail.next;
         return n.val;
     }
     
@@ -49,6 +50,7 @@ class LRUCache {
         Node t = mp.getOrDefault(key,null);
         if(t!=null){
             t.val = value;
+            mp.put(key,t);
             get(key);
             return;
         }
