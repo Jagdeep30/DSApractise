@@ -17,6 +17,6 @@ class Solution {
             }
             else return false;
         }
-        return true;
+        return st.isEmpty()?true:false;
     }
 }
