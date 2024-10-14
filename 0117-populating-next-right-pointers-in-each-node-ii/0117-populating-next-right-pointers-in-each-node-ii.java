@@ -32,7 +32,7 @@ class Solution {
                 // if(!q.isEmpty())q.add(null);
                 continue;
             }
-            if(!q.isEmpty())n.next = q.peek();
+            n.next = q.peek();
             if(n.left!=null)q.add(n.left);
             if(n.right!=null)q.add(n.right);
             if(q.peek()==null)q.add(null);
