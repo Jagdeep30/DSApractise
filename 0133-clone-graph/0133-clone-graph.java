@@ -21,37 +21,23 @@ class Node {
 class Solution {
     public Node cloneGraph(Node node) {
         if(node == null)return node;
-        Map<Node,Node> pair = new HashMap<>();
-        dfsO(new HashMap<Node,Boolean>(),node,pair);
-        dfsT(new HashMap<Node,Boolean>(),node,pair);
-        return pair.get(node);
+        Node ans = new Node(node.val);
+        Map<Integer,Node> p = new HashMap<>();
+        p.put(node.val,ans);
+        dfs(node,ans,new HashMap<Node,Boolean>(),p);
+        return ans;
     }
 
-    static void dfsT(Map<Node,Boolean> mp, Node node, Map<Node,Node> pair){
+    static void dfs(Node node, Node t, Map<Node,Boolean> mp, Map<Integer,Node> p){
         if(mp.getOrDefault(node,false))return;
 
-        Node t = pair.get(node);
         mp.put(node,true);
-        List<Node> arr = node.neighbors;
-        for(int i=0;i<arr.size();i++){
-            t.neighbors.add(pair.get(node.neighbors.get(i)));
-        }
-
-        for(int i=0;i<arr.size();i++){
-            if(!mp.getOrDefault(arr.get(i),false))dfsT(mp,arr.get(i),pair);
-        }
-        return;
-    }
-
-    static void dfsO(Map<Node,Boolean> mp, Node node, Map<Node,Node> pair){
-        if(mp.getOrDefault(node,false))return;
-
-        Node t = new Node(node.val);
-        pair.put(node,t);
-        mp.put(node,true);
-        List<Node> arr = node.neighbors;
-        for(int i=0;i<arr.size();i++){
-            if(!mp.getOrDefault(arr.get(i),false))dfsO(mp,arr.get(i),pair);
+        List<Node> ls = node.neighbors;
+        for(int i=0;i<ls.size();i++){
+            Node n = p.getOrDefault(ls.get(i).val,new Node(ls.get(i).val));
+            t.neighbors.add(n);
+            p.put(ls.get(i).val,n);
+            if(!mp.getOrDefault(ls.get(i),false))dfs(ls.get(i),n,mp,p);
         }
 
         return;
