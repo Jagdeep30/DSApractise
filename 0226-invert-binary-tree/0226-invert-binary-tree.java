@@ -32,8 +32,10 @@ class Solution {
             root.right = root.left;
             root.left = temp;
         }
-        root.left = invertTree(root.left);
-        root.right = invertTree(root.right);
+        invertTree(root.left);
+        invertTree(root.right);
+        // root.left = invertTree(root.left);
+        // root.right = invertTree(root.right);
         return root;
     }
 }
