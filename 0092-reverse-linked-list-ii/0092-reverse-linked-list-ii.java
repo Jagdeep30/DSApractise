@@ -14,7 +14,7 @@ class Solution {
         ListNode temp = head;
         int c = 1;
         while(temp!=null && c<left-1){
-            System.out.println("c");
+            // System.out.println("c");
             temp = temp.next;
             c++;
         }
