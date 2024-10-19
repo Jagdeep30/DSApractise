@@ -15,16 +15,22 @@
  */
 class Solution {
     public int countNodes(TreeNode root) {
+
+        //BFS
+        // if(root==null)return 0;
+        // Queue<TreeNode> q = new LinkedList<>();
+        // q.add(root);
+        // int c = 0;
+        // while(!q.isEmpty()){
+        //     TreeNode t = q.poll();
+        //     c++;
+        //     if(t.left!=null)q.add(t.left);
+        //     if(t.right!=null)q.add(t.right);
+        // }
+        // return c;
+
+        //DFS
         if(root==null)return 0;
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        int c = 0;
-        while(!q.isEmpty()){
-            TreeNode t = q.poll();
-            c++;
-            if(t.left!=null)q.add(t.left);
-            if(t.right!=null)q.add(t.right);
-        }
-        return c;
+        return countNodes(root.left) + countNodes(root.right) + 1;
     }
 }
