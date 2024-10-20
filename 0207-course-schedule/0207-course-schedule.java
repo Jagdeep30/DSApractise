@@ -1,43 +1,56 @@
 class Solution {
-    public boolean canFinish(int numCourses, int[][] pre) {
-        Map<Integer,ArrayList<Integer>> adj = new HashMap<>();
+    public boolean canFinish(int numCourses, int[][] p) {
+        Map<Integer,List<Integer>> mp = new HashMap<>();
+        for(int i=0;i<p.length;i++){
+            // if(p[i][0]==p[i][1])continue;
+            List<Integer> ls  = mp.getOrDefault(p[i][0],new ArrayList<Integer>());
+            // mp.put(p[i][0],p[i][1]);
+            ls.add(p[i][1]);
+            mp.put(p[i][0],ls);
+        }
+        boolean ans = true;
+        Map<Integer,Boolean> res = new HashMap<>();
         for(int i=0;i<numCourses;i++){
-            adj.put(i,new ArrayList<Integer>());
+            if(res.getOrDefault(i,false)){
+                ans = ans && res.get(i);
+                // System.out.println("ans for "+i+" are "+res.get(i));
+                continue;
+            }
+            boolean r = dfs(i,numCourses,mp,new HashMap<>(),res);
+            ans = ans && r;
+            // System.out.println("ans for "+i+" is "+r);
+            res.put(i,r);
         }
-        for(int i=0;i<pre.length;i++){
-            ArrayList<Integer> temp = adj.get(pre[i][1]);
-            temp.add(pre[i][0]);
-            adj.put(pre[i][1],temp);
-        }
-        
-        ArrayList<Boolean> visited = new ArrayList<>();
-        ArrayList<Boolean> visitedDfs = new ArrayList<>();
-        for(int i=0;i<numCourses;i++){
-            visited.add(false);
-            visitedDfs.add(false);
-        }
-        for(int i=0;i<numCourses;i++){
-            if(!visited.get(i))
-            if(!dfs(adj,i,visitedDfs,visited))return false;
-        }
-        return true;
+        return ans;
     }
 
-    static boolean dfs(Map<Integer,ArrayList<Integer>> adj,int node, ArrayList<Boolean> visitedDfs,ArrayList<Boolean> visited){
-
-        visited.set(node,true);
-        visitedDfs.set(node,true);
-
-        for(int i=0;i<adj.get(node).size();i++){
-            if(visited.get(adj.get(node).get(i))==true && visitedDfs.get(adj.get(node).get(i))==true){
-                return false;
+    static boolean dfs(int i, int numCourses, Map<Integer,List<Integer>> mp, Map<Integer,Boolean> visited, Map<Integer,Boolean> r){
+        // System.out.println("reached");
+        if(mp.getOrDefault(i,null)==null)return true;
+        if(i>=numCourses)return true;
+        if(r.getOrDefault(i,false))return true;
+// System.out.println(i);
+        visited.put(i,true);
+        List<Integer> ls = mp.get(i);
+        if(ls==null)return true;
+        boolean ans = true;
+        for(int j=0;j<ls.size();j++){
+            if(!visited.getOrDefault(ls.get(j),false)){
+                if(r.getOrDefault(ls.get(j),false)){
+                    ans = ans && r.get(ls.get(j));
+                    // System.out.println("ans for "+j+" are "+r.get(ls.get(j)));
+                    continue;
+                }
+                boolean rr = dfs(ls.get(j),numCourses,mp,visited,r);
+                ans = ans && rr;
+                r.put(ls.get(j),rr);
+                // System.out.println("ans for "+j+" is "+rr);
             }
-            if(!visited.get(adj.get(node).get(i))){
-                boolean res = dfs(adj,adj.get(node).get(i),visitedDfs,visited);
-                if(!res)return false;
-            }
+            else ans = r.getOrDefault(ls.get(j),false);
         }
-        visitedDfs.set(node,false);
-        return true;
+        // visited.put(i,false);
+        // System.out.println("end for "+i+" were "+ans);
+        r.put(i,ans);
+        return ans;
     }
 }
