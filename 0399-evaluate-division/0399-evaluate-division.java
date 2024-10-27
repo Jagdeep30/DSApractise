@@ -15,16 +15,16 @@ class Solution {
         // System.out.println(adj);
         double[] ans = new double[queries.size()];
         for(int i=0;i<queries.size();i++){
-            if(equations.contains(queries.get(i))){
-                ans[i] = values[equations.indexOf(queries.get(i))];
-                continue;
-            }
-            Collections.reverse(queries.get(i));
-            if(equations.contains(queries.get(i))){
-                ans[i] = 1/values[equations.indexOf(queries.get(i))];
-                continue;
-            }
-            Collections.reverse(queries.get(i));
+            // if(equations.contains(queries.get(i))){
+            //     ans[i] = values[equations.indexOf(queries.get(i))];
+            //     continue;
+            // }
+            // // Collections.reverse(queries.get(i));
+            // if(equations.contains(queries.get(i))){
+            //     ans[i] = 1/values[equations.indexOf(queries.get(i))];
+            //     continue;
+            // }
+            // Collections.reverse(queries.get(i));
             ans[i] = dfs(queries.get(i).get(0),queries.get(i).get(1),adj,new HashMap<String,Boolean>());
         }
         return ans;
@@ -42,8 +42,7 @@ class Solution {
         visited.put(s,true);
         for(int i=0;i<ss.size();i++){
             double tans = !visited.getOrDefault(ss.get(i).getKey(),false)?dfs(ss.get(i).getKey(),e,adj,visited):-1.0;
-            if(tans == -1.0){continue;}
-            else{
+            if(tans != -1.0){
                 val = true;
                 ans*=tans;
                 t = ss.get(i).getValue();
