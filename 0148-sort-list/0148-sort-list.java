@@ -56,16 +56,19 @@ class Solution {
             nw = nw.next;
         }
 
-        while(t1!=null){
-            nw.next = t1;
-            t1 = t1.next;
-            nw = nw.next;
-        }
-        while(t2!=null){
-            nw.next = t2;
-            t2 = t2.next;
-            nw = nw.next;
-        }
+        // while(t1!=null){
+        //     nw.next = t1;
+        //     t1 = t1.next;
+        //     nw = nw.next;
+        // }
+        // while(t2!=null){
+        //     nw.next = t2;
+        //     t2 = t2.next;
+        //     nw = nw.next;
+        // }
+
+        if(t1!=null)nw.next = t1;
+        else nw.next = t2;
 
         return nHead.next;
     }
