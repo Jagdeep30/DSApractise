@@ -9,8 +9,20 @@ class Solution {
         // }
         // return true;
 
-        StringBuilder s = new StringBuilder(Integer.toString(x));
-        if(s.toString().equals(new StringBuilder(s).reverse().toString()))return true;
-        return false;
+        // StringBuilder s = new StringBuilder(Integer.toString(x));
+        // if(s.toString().equals(new StringBuilder(s).reverse().toString()))return true;
+        // return false;
+        int sum=0,r,temp=x;
+        while(x>0){
+            r=x%10;
+            x=x/10;
+            sum=sum*10+r;
+        }
+        if(temp==sum){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
