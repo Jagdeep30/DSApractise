@@ -22,6 +22,10 @@ class Solution {
             if(mp.getOrDefault(temp,false)){
                 ans = ans || solve(j+1,s,mp,dp);
             }
+            if(ans){
+                dp[i] = ans?1:0;
+                return ans;
+            }
         }
         if(mp.getOrDefault(temp,false))ans = true;
         dp[i] = ans?1:0;
