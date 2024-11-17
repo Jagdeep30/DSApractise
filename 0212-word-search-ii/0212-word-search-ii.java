@@ -14,13 +14,13 @@ class Solution {
         for(int i=0;i<words.length;i++)insert(head, words[i]);
         for(int i=0;i<board.length;i++){
             for(int j=0;j<board[0].length;j++){
-                dfs(i,j,head,board,"",ans,visited);
+                if(head.t[board[i][j]-'a']!=null)dfs(i,j,head,board,new StringBuilder(),ans,visited);
             }
         }
         return new ArrayList<String>(ans);
     }
 
-    static void dfs(int i, int j, Node n, char[][] board, String temp, Set<String> ans, boolean[][] visited){
+    static void dfs(int i, int j, Node n, char[][] board, StringBuilder temp, Set<String> ans, boolean[][] visited){
         if(i<0 || j<0 || i>=board.length || j>=board[0].length || visited[i][j])return;
         if(n==null){
             // System.out.println("got n==null at   "+i+"   "+j);
@@ -30,22 +30,25 @@ class Solution {
         n = n.t[board[i][j]-'a'];
 
         // temp += board[i][j];
+        temp = temp.append(board[i][j]);
         if(n.end){
-            ans.add(temp+board[i][j]);
+            n.end = false;
+            ans.add(temp.toString());
         }
         // System.out.println(i+"   "+j);
         visited[i][j] = true;
 
         //up
-        dfs(i-1,j,n,board,temp+board[i][j],ans,visited);
+        dfs(i-1,j,n,board,temp,ans,visited);
         //right
-        dfs(i,j+1,n,board,temp+board[i][j],ans,visited);
+        dfs(i,j+1,n,board,temp,ans,visited);
         //down
-        dfs(i+1,j,n,board,temp+board[i][j],ans,visited);
+        dfs(i+1,j,n,board,temp,ans,visited);
         //left
-        dfs(i,j-1,n,board,temp+board[i][j],ans,visited);
+        dfs(i,j-1,n,board,temp,ans,visited);
 
         visited[i][j] = false;
+        temp = temp.deleteCharAt(temp.length()-1);
 
         return;
     }
