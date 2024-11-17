@@ -15,7 +15,7 @@ class Solution {
             }
             else if(c=='('){
                 int[] ans = solve(i+1,s);
-                System.out.println(Arrays.toString(ans));
+                // System.out.println(Arrays.toString(ans));
                 i = ans[0];
                 i--;
                 res += (ans[1]*sign);
