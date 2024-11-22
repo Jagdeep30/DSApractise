@@ -19,7 +19,7 @@ class Solution {
         }
         if(k==card.length)return win;
         ans = Math.max(ans,win);
-        while(j<arr.length-k){
+        while(j<card.length+k){
             // System.out.println(win);
             win+=arr[j];
             j++;
