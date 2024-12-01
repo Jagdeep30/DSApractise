@@ -14,9 +14,9 @@ class Solution {
                 while(i<j){
                     f[s.charAt(i)-'A']--;
                     i++;
-                    maxf = maxFreq(f);
+                    // maxf = maxFreq(f);
                     if(j-i+1 - maxf <= k){
-                        ans = Math.max(ans,j-i+1);
+                        // ans = Math.max(ans,j-i+1);
                         break;
                     }
                 }
