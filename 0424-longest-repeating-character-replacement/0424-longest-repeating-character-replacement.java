@@ -11,15 +11,15 @@ class Solution {
             maxf = Math.max(maxf,f[s.charAt(j)-'A']);
             if(j-i+1 - maxf <= k)ans = Math.max(ans, j-i+1);
             else {
-                while(i<j){
+                // while(i<j){
                     f[s.charAt(i)-'A']--;
                     i++;
                     // maxf = maxFreq(f);
-                    if(j-i+1 - maxf <= k){
-                        // ans = Math.max(ans,j-i+1);
-                        break;
-                    }
-                }
+                    // if(j-i+1 - maxf <= k){
+                    //     // ans = Math.max(ans,j-i+1);
+                    //     break;
+                    // }
+                // }
             }
             j++;
         }
