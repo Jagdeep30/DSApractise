@@ -1,7 +1,7 @@
 class Solution {
     public boolean hasAllCodes(String s, int k) {
         int n = s.length();
-        if(Math.pow(2,k)+1 > n)return false;
+        if(Math.pow(2,k)+1 > n && k!=1)return false;
         // StringBuilder sb = new StringBuilder();
         // String t = ""
         Set<String> st = new HashSet<>();
