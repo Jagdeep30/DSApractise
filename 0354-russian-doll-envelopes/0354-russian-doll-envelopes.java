@@ -1,26 +1,25 @@
 class Solution {
     public int maxEnvelopes(int[][] arr) {
         Arrays.sort(arr, (a,b)->{
-            return a[0]!=b[0]?a[0]-b[0]:a[1]-b[1];
+            return a[0]!=b[0]?a[0]-b[0]:b[1]-a[1];
         });
 
-        int ans = 1;
-        int max = arr[0][1];
-        int max2 = arr[0][0];
-        for(int i=1;i<arr.length;i++){
-            System.out.println(i);
-            System.out.println("before max1: "+max+"  max2: "+max2);
-            if(arr[i][1]>max && arr[i][0]!=max2){
-                max = arr[i][1];
-                max2 = arr[i][0];
-                ans++;
-            }
-            // else if(arr[i][1]<=max){
-            //     max = arr[i][1];
-            //     // max2 = arr[i][0];
-            // }
-            System.out.println("before max1: "+max+"  max2: "+max2);
+        int size = 0;
+        int[] arr2 = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            int ind = binarySearch(arr2,size,arr[i][1]);
+            if(ind==size)size++;
         }
-        return ans;
+        return size;
+    }
+    static int binarySearch(int[] arr, int e, int ele){
+        int s = 0;
+        while(s<e){
+            int mid = s+(e-s)/2;
+            if(arr[mid]>=ele)e=mid;
+            else s=mid+1;
+        }
+        arr[e] = ele;
+        return e;
     }
 }
