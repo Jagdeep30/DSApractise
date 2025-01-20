@@ -1,36 +1,27 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> ans = new ArrayList<>();
-        String output = "";
-        solve(ans,output,n,n,n);
+        generate(0,0,n,ans,"");
         return ans;
     }
 
-    static void solve(List<String> ans, String output, int n, int open, int close){
-        //base case
-        if(open==0 && close==0){
-            String temp = output;
-            ans.add(temp);
+    static void generate(int o, int c, int n, List<String> ans, String st){
+        if(c>o || c>n || o>n || st.length()>n*2)return;
+        if(st.length() == n*2 && o==n && c==n){
+            ans.add(new String(st));
             return;
         }
 
-        //processing
-
-
-        //call for open bracket
-        if(open!=0 && open<=close){
-            output+='(';
-            solve(ans,output,n,open-1,close);
-            output = output.substring(0,output.length()-1);
+        //choose open
+        if(o<n){
+            generate(o+1,c,n,ans,st+"(");
         }
 
-        //call for closed bracket
-        if(close!=0 && close!=open){
-            output+=')';
-            solve(ans,output,n,open,close-1);
-            output = output.substring(0,output.length()-1);
+        //choose close
+        if(c<o && c<n){
+            generate(o,c+1,n,ans,st+")");
         }
 
-        return ;
+        return;
     }
 }
