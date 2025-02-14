@@ -15,25 +15,35 @@
  */
 class Solution {
     public int rob(TreeNode root) {
-        return solve(root, false);
+        int[] res = solve(root, new HashMap<TreeNode, ArrayList<Integer>>());
+        return Math.max(res[0], res[1]);
     }
 
-    static int solve(TreeNode node, boolean prev){
+    static int[] solve(TreeNode node, Map<TreeNode, ArrayList<Integer>> dp){
         //base case
-        if(node==null)return 0;
-        if(node.left==null && node.right==null && prev)return 0;
-        if(node.left==null && node.right==null && !prev)return node.val;
+        if(node==null)return new int[2];
+        if(node.left==null && node.right==null)return new int[]{node.val, 0};
+
+        ArrayList<Integer> p = dp.getOrDefault(node,null);
+        if(p!=null && p.size()==2){
+            return new int[]{p.get(0),p.get(1)};
+        }
+        else p = new ArrayList<Integer>();
 
         int max = Integer.MIN_VALUE;
-        //include this node
-        //include only if the parent was not included using variable prev
-        if(!prev){
-            max = Math.max(max, solve(node.left, true) + solve(node.right, true) + node.val);
-        }
 
-        //don't include this node
-        max = Math.max(max, solve(node.left, false) + solve(node.right, false));
+        //left
+        int[] left = solve(node.left, dp);
+        //right
+        int[] right = solve(node.right, dp);
 
-        return max;
+        //current included
+        int inc = node.val + left[1] + right[1];
+        //current excluded
+        int exc = Math.max(left[0],left[1]) + Math.max(right[0], right[1]);
+        p.add(inc);
+        p.add(exc);
+        dp.put(node, p);
+        return new int[]{inc, exc};
     }
 }
