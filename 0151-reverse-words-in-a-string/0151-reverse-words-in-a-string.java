@@ -1,41 +1,18 @@
-
 class Solution {
-    //reverse function 
-    private void reverse(StringBuilder sb, int start, int end) {
-        
-        while (start < end) {
-            char temp = sb.charAt(start);
-            sb.setCharAt(start, sb.charAt(end));
-            sb.setCharAt(end, temp);
-            start++;
-            end--;
-        }
-    }
-
     public String reverseWords(String s) {
-        s=s.strip();//remove all leading and trailing spaces
-    
-        StringBuilder sb = new StringBuilder(s).reverse(); 
-         
-       
-        for(int i =0;i<sb.length();i++){
-           
-           
-            
-            int j = i;
-            while(i<sb.length()&&sb.charAt(i)!=' '){
-             
-                i++; //moving i till space is found
-
-            }
-            //we are at space index now
-            int e = i-1; //go back to where there was a letter
-
-            reverse(sb,j,e); //got both index and reversed
-
-
+        s = s.strip();
+        String[] arr = s.split("\s+");
+        // String ans = "";
+        int i=0;
+        int j=arr.length-1;
+        while(i<j){
+            String t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
+            i++;j--;
         }
-        //replace all spaces with single space
-        return sb.toString().replaceAll(" +"," "); 
+        return String.join(" ", arr);
+        // System.out.println(ss);
+        // return ss;
     }
 }
