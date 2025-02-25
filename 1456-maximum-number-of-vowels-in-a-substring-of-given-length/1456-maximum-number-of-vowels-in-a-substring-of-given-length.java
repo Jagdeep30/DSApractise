@@ -9,7 +9,7 @@ class Solution {
 
         int sum = 0;
         int ans = 0;
-        System.out.println(temp);
+        // System.out.println(temp);
         for(int i=0;i<k;i++){
             if(temp.charAt(i)=='1')sum++;
         }
