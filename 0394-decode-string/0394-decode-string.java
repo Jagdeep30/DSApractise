@@ -14,7 +14,7 @@ class Solution {
                 st.pop();
                 //check for digits
                 String dig = "";
-                while(!st.isEmpty() && (st.peek().equals("0") || st.peek().equals("1") || st.peek().equals("2") || st.peek().equals("3") || st.peek().equals("4") || st.peek().equals("5") || st.peek().equals("6") || st.peek().equals("7") || st.peek().equals("8") || st.peek().equals("9"))){
+                while(!st.isEmpty() && st.peek().matches("[0-9]")){
                     dig = st.pop() + dig;
                 }
                 int mul = dig!=""?Integer.parseInt(dig):1;
