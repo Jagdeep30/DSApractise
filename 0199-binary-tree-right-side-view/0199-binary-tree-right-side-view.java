@@ -14,25 +14,23 @@
  * }
  */
 class Solution {
-    // int min;
-    static int max;
     public List<Integer> rightSideView(TreeNode root) {
-        Map<Integer,Integer> mp = new HashMap<>();
-        // min = Integer.MAX_VALUE;
-        max = Integer.MIN_VALUE;
-        solve(root,0,mp);
         List<Integer> ls = new ArrayList<>();
-        for(int i=1;i<=max;i++){
-            ls.add(mp.get(i));
+        if(root==null)return ls;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        q.add(null);
+        while(!q.isEmpty()){
+            TreeNode front = q.poll();
+            if(front==null){
+                if(q.size()!=0)q.add(null);
+                continue;
+            }
+            if(front.left!=null)q.add(front.left);
+            if(front.right!=null)q.add(front.right);
+
+            if(q.peek()==null)ls.add(front.val);
         }
         return ls;
-    }
-    static void solve(TreeNode root, int h, Map<Integer,Integer> mp){
-        if(root==null)return;
-        h++;
-        max = Math.max(max,h);
-        mp.put(h,root.val);
-        solve(root.left,h,mp);
-        solve(root.right,h,mp);
     }
 }
