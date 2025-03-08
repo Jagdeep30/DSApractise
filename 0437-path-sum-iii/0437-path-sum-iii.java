@@ -25,7 +25,7 @@ class Solution {
         return ans;
     }
 
-    public void helper(TreeNode root, int sum){
+    public void helper(TreeNode root, long sum){
         if(root==null)return;
         if(sum == root.val)ans++;
 
