@@ -15,22 +15,26 @@
  */
 class Solution {
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
-        List<Integer> a1 = new ArrayList<>();
-        inorder(root1,a1);
-        List<Integer> a2 = new ArrayList<>();
-        inorder(root2,a2);
-        if(a1.size()!=a2.size())return false;
-        for(int i=0;i<a1.size();i++){
-            if(a1.get(i)!=a2.get(i))return false;
-        }
-        return true;
+        List<Integer> ls = new ArrayList<>();        
+        List<Integer> lss = new ArrayList<>();        
+        leafSeq(root1,ls);
+        leafSeq(root2,lss);
+
+        // System.out.println(ls);
+        // System.out.println(lss);
+        return ls.equals(lss);
     }
 
-    static void inorder(TreeNode node, List<Integer> arr){
-        if(node==null)return;
+    static void leafSeq(TreeNode root, List<Integer> ls){
+        if(root==null)return;
+        if(root.left == null && root.right==null){
+            ls.add(root.val);
+            return;
+        }
 
-        inorder(node.left,arr);
-        if(node.left==null && node.right==null)arr.add(node.val);
-        inorder(node.right,arr);
+        leafSeq(root.left,ls);
+        leafSeq(root.right,ls);
+
+        return;
     }
 }
