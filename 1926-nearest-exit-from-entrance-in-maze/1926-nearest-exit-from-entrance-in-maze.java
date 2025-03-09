@@ -4,10 +4,11 @@ class Solution {
         int m = maze[0].length;
         Queue<List<Integer>> q = new LinkedList<>();
         List<Integer> temp = new ArrayList<>();
-        Map<String,Boolean> mp = new HashMap<>();
+        // Map<String,Boolean> mp = new HashMap<>();
         temp.addAll(Arrays.asList(entrance[0], entrance[1], 0));
         q.add(temp);
-        mp.put(Integer.toString(entrance[0])+","+Integer.toString(entrance[1]),true);
+        // mp.put(Integer.toString(entrance[0])+","+Integer.toString(entrance[1]),true);
+        maze[entrance[0]][entrance[1]] = '+';
         while(!q.isEmpty()){
             // System.out.println(q);
             List<Integer> ls = q.poll();
@@ -20,8 +21,9 @@ class Solution {
             //up
             int r = i-1;
             int c = j;
-            if(r>=0 && !mp.getOrDefault(Integer.toString(r)+","+Integer.toString(c),false) && maze[r][c]=='.'){
-                mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+            if(r>=0 && maze[r][c]=='.'){
+                // mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+                maze[r][c] = '+';
                 temp = new ArrayList<>();
                 temp.add(r);
                 temp.add(c);
@@ -31,8 +33,9 @@ class Solution {
             //down
             r = i+1;
             c = j;
-            if(r<n && !mp.getOrDefault(Integer.toString(r)+","+Integer.toString(c),false) && maze[r][c]=='.'){
-                mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+            if(r<n && maze[r][c]=='.'){
+                // mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+                maze[r][c] = '+';
                 temp = new ArrayList<>();
                 temp.add(r);
                 temp.add(c);
@@ -42,8 +45,9 @@ class Solution {
             //left
             r = i;
             c = j+1;
-            if(c<m && !mp.getOrDefault(Integer.toString(r)+","+Integer.toString(c),false) && maze[r][c]=='.'){
-                mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+            if(c<m && maze[r][c]=='.'){
+                // mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+                maze[r][c] = '+';
                 temp = new ArrayList<>();
                 temp.add(r);
                 temp.add(c);
@@ -53,8 +57,9 @@ class Solution {
             //right
             r = i;
             c = j-1;
-            if(c>=0 && !mp.getOrDefault(Integer.toString(r)+","+Integer.toString(c),false) && maze[r][c]=='.'){
-                mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+            if(c>=0 && maze[r][c]=='.'){
+                // mp.put(Integer.toString(r)+","+Integer.toString(c),true);
+                maze[r][c] = '+';
                 temp = new ArrayList<>();
                 temp.add(r);
                 temp.add(c);
