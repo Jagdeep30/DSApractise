@@ -1,42 +1,49 @@
-class Trie {
-    Trie[] t;
+class Node {
+    Node[] arr;
     boolean end;
-    public Trie() {
-        t = new Trie[26];
+    Node(){
+        arr = new Node[26];
         end = false;
+    }
+}
+
+class Trie {
+    Node start;
+    public Trie() {
+        start = new Node();
     }
     
     public void insert(String word) {
-        Trie[] temp = t;
-        for(int i=0;i<word.length();i++){
-            int ind = word.charAt(i)-'a';
-            if(temp[ind]==null){
-                temp[ind] = new Trie();
+        Node temp = start;
+        int len = word.length();
+        for(int i=0;i<len;i++){
+            char c = word.charAt(i);
+            if(temp.arr[c-'a'] == null){
+                temp.arr[c-'a'] = new Node();
             }
-            if(!temp[ind].end)temp[ind].end = i==word.length()-1?true:false;
-            temp = temp[ind].t;
+            temp = temp.arr[c-'a'];
         }
-        // temp.end = true;
-        return;
+        temp.end = true;
     }
     
     public boolean search(String word) {
-        Trie[] temp = t;
-        for(int i=0;i<word.length();i++){
-            int ind = word.charAt(i)-'a';
-            if(temp[ind]==null)return false;
-            if(i==word.length()-1 && temp[ind].end==true)return true;
-            temp = temp[ind].t;
+        Node temp = start;
+        int len = word.length();
+        for(int i=0;i<len;i++){
+            char c = word.charAt(i);
+            if(temp.arr[c-'a']==null)return false;
+            temp = temp.arr[c-'a'];
         }
-        return false;
+        return temp.end;
     }
     
     public boolean startsWith(String prefix) {
-        Trie[] temp = t;
-        for(int i=0;i<prefix.length();i++){
-            int ind = prefix.charAt(i)-'a';
-            if(temp[ind]==null)return false;
-            temp = temp[ind].t;
+        Node temp = start;
+        int len = prefix.length();
+        for(int i=0;i<len;i++){
+            char c = prefix.charAt(i);
+            if(temp.arr[c-'a']==null)return false;
+            temp = temp.arr[c-'a'];
         }
         return true;
     }
