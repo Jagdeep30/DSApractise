@@ -14,22 +14,22 @@
  * }
  */
 class Solution {
-    int ans = 0;
+    int max = Integer.MIN_VALUE;
     public int diameterOfBinaryTree(TreeNode root) {
-        height(root);
-        return ans-1;
+        if(root == null || (root.left==null && root.right==null))return 0;
+        // this.max = Math.max(this.max,solve(root));
+        solve(root);
+        return this.max;
     }
 
-     int height(TreeNode root){
-        if(root==null)return 0;
+    int solve(TreeNode node){
+        if(node==null)return -1;
+        if(node.left==null && node.right==null)return 0;
 
-       int left =  height(root.left);
-        int right = height(root.right);
-
-        if(left+right+1>ans){
-            ans = left+right+1;
-        }
-
+        int left = solve(node.left);
+        int right = solve(node.right);
+        
+        this.max = Math.max(this.max,left+right+2);
         return Math.max(left,right)+1;
     }
 }
